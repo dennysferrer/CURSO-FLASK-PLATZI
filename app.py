@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!!!!!!'
+def home():
+    role = "admin"
+    notas = ["Nota 1", "Nota 2", "Nota 3"]
+    return render_template('home.html', role=role, notas=notas)
 
 @app.route('/about')
 def about():
@@ -24,3 +26,12 @@ def api_info():
         "author": "Dennys Ferrer"
     }
     return jsonify(data),200
+
+
+@app.route('/crear', methods=['POST', 'GET'])
+def create_note():
+    if request.method == 'POST':
+        nota = request.form.get('nota', 'No encontrado')
+        print(nota)
+    return render_template('note_form.html')
+    

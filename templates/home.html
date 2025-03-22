@@ -7,5 +7,18 @@
 </head>
 <body>
     <h1>Bienvenido a Flask Notes</h1>
+    {% if role == 'Admin' %}
+        <h2>Eres {{ role }} en el sistema...</h2>
+        <button>Eliminar</button>
+    {% else %}
+        <h2>Eres {{ role }} en el sistema...</h2>
+        <button>Agregar</button>
+    {% endif %}
+
+    <ul>
+        {% for nota in notas %}
+            <li>{{ nota }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
